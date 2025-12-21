@@ -4,25 +4,47 @@ import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/auth")
-public class AuthController {
+@RequestMapping("/users")
+public class UserController {
 
-    private final UserService authService;
+    private final UserService userService;
 
-    public AuthController(AuthService authService) {
-        this.authService = authService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    // POST /auth/register
-    @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return authService.register(user);
+    // CREATE
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        return userService.createUser(user);
     }
 
-    // GET /auth/user/{id}
-    @GetMapping("/user/{id}")
+    // READ ALL
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+    // READ BY ID
+    @GetMapping("/{id}")
     public User getUser(@PathVariable Long id) {
-        return authService.getUser(id);
+        return userService.getUserById(id);
+    }
+
+    // UPDATE
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Long id,
+                           @RequestBody User user) {
+        return userService.updateUser(id, user);
+    }
+
+    // DELETE
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return "User deleted successfully";
     }
 }

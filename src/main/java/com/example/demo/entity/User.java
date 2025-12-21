@@ -19,12 +19,12 @@ public class User {
 
     private String role;
 
-    // No-arg constructor
+    
     public User() {
         this.role = "ANALYST"; // default role
     }
 
-    // Parameterized constructor
+    
     public User(String name, String email, String password, String role) {
         this.name = name;
         this.email = email;
@@ -32,7 +32,7 @@ public class User {
         this.role = (role == null || role.isEmpty()) ? "ANALYST" : role;
     }
 
-    // Getters & Setters
+    
     public Long getId() {
         return id;
     }
