@@ -43,6 +43,10 @@ public class Property {
         this.areaSqFt = areaSqFt;
     }
 
+    public void addRatingLog(RatingLog log) {
+    ratingLogs.add(log);
+    log.setProperty(this);
+}
     // getters & setters
     public Long getId() { return id; }
 
