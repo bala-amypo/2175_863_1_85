@@ -37,4 +37,12 @@ public class RatingLog {
     public Property getProperty() { return property; }
     public String getMessage() { return message; }
     public LocalDateTime getLoggedAt() { return loggedAt; }
+
+    public void setProperty(Property property) {
+    this.property = property;
+}
+
+public void setMessage(String message) {
+    this.message = message;
+}
 }
