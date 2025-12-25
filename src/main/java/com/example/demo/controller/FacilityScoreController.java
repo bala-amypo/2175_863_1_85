@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.FacilityScore;
 import com.example.demo.service.FacilityScoreService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,18 +15,22 @@ public class FacilityScoreController {
         this.facilityScoreService = facilityScoreService;
     }
 
-    
     @PostMapping("/{propertyId}")
-    public FacilityScore addScore(
+    public ResponseEntity<FacilityScore> addScore(
             @PathVariable Long propertyId,
             @RequestBody FacilityScore score) {
 
-        return facilityScoreService.addScore(propertyId, score);
+        return ResponseEntity.ok(
+                facilityScoreService.addScore(propertyId, score)
+        );
     }
 
-    
     @GetMapping("/{propertyId}")
-    public FacilityScore getScore(@PathVariable Long propertyId) {
-        return facilityScoreService.getScoreByProperty(propertyId);
+    public ResponseEntity<FacilityScore> getScore(
+            @PathVariable Long propertyId) {
+
+        return ResponseEntity.ok(
+                facilityScoreService.getScoreByProperty(propertyId)
+        );
     }
 }

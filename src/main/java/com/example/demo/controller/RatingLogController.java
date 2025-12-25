@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.RatingLog;
 import com.example.demo.service.RatingLogService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,18 +17,22 @@ public class RatingLogController {
         this.ratingLogService = ratingLogService;
     }
 
-    
     @PostMapping("/{propertyId}")
-    public RatingLog addLog(
+    public ResponseEntity<RatingLog> addLog(
             @PathVariable Long propertyId,
-            @RequestParam String message) {
+            @RequestBody String message) {
 
-        return ratingLogService.addLog(propertyId, message);
+        return ResponseEntity.ok(
+                ratingLogService.addLog(propertyId, message)
+        );
     }
 
-    
     @GetMapping("/{propertyId}")
-    public List<RatingLog> getLogs(@PathVariable Long propertyId) {
-        return ratingLogService.getLogs(propertyId);
+    public ResponseEntity<List<RatingLog>> getLogs(
+            @PathVariable Long propertyId) {
+
+        return ResponseEntity.ok(
+                ratingLogService.getLogsByProperty(propertyId)
+        );
     }
 }

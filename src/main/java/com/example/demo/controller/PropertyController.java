@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Property;
 import com.example.demo.service.PropertyService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,15 +17,15 @@ public class PropertyController {
         this.propertyService = propertyService;
     }
 
-    
     @PostMapping
-    public Property addProperty(@RequestBody Property property) {
-        return propertyService.addProperty(property);
+    public ResponseEntity<Property> addProperty(
+            @RequestBody Property property) {
+
+        return ResponseEntity.ok(propertyService.addProperty(property));
     }
 
-    
     @GetMapping
-    public List<Property> getAllProperties() {
-        return propertyService.getAllProperties();
+    public ResponseEntity<List<Property>> getAllProperties() {
+        return ResponseEntity.ok(propertyService.getAllProperties());
     }
 }
