@@ -51,4 +51,20 @@ public class FacilityScore {
     public Integer getHospitalProximity() { return hospitalProximity; }
     public Integer getTransportAccess() { return transportAccess; }
     public Integer getSafetyScore() { return safetyScore; }
+
+    public void setSchoolProximity(Integer schoolProximity) {
+    this.schoolProximity = schoolProximity;
+}
+
+public void setHospitalProximity(Integer hospitalProximity) {
+    this.hospitalProximity = hospitalProximity;
+}
+
+public void setTransportAccess(Integer transportAccess) {
+    this.transportAccess = transportAccess;
+}
+
+public void setSafetyScore(Integer safetyScore) {
+    this.safetyScore = safetyScore;
+}
 }
