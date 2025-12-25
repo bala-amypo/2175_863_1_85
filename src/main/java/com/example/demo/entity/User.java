@@ -1,9 +1,16 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(
+    name = "users",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email")
+    }
+)
 public class User {
 
     @Id
@@ -12,27 +19,35 @@ public class User {
 
     private String name;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
     private String role;
 
-    // No-arg constructor
+    @ManyToMany
+    @JoinTable(
+        name = "user_properties",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "property_id")
+    )
+    private Set<Property> assignedProperties = new HashSet<>();
+
+    
     public User() {
-        this.role = "ANALYST";
     }
 
-    // Parameterized constructor
+    
     public User(String name, String email, String password, String role) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.role = (role == null || role.isEmpty()) ? "ANALYST" : role;
+        this.role = role;
     }
 
-    // Getters & Setters
+    
     public Long getId() {
         return id;
     }
@@ -52,15 +67,23 @@ public class User {
     public String getEmail() {
         return email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Property> getAssignedProperties() {
+        return assignedProperties;
+    }
+
+    public void setAssignedProperties(Set<Property> assignedProperties) {
+        this.assignedProperties = assignedProperties;
     }
 
     public String getPassword() {
         return password;
     }
-    
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -68,8 +91,8 @@ public class User {
     public String getRole() {
         return role;
     }
-    
+
     public void setRole(String role) {
-        this.role = (role == null || role.isEmpty()) ? "ANALYST" : role;
+        this.role = role;
     }
 }
