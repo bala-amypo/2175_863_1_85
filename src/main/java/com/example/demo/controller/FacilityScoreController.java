@@ -2,26 +2,36 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.FacilityScore;
 import com.example.demo.service.FacilityScoreService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/scores")
 public class FacilityScoreController {
 
-    private final FacilityScoreService scoreService;
+    private final FacilityScoreService facilityScoreService;
 
-    public FacilityScoreController(FacilityScoreService scoreService) {
-        this.scoreService = scoreService;
+    public FacilityScoreController(FacilityScoreService facilityScoreService) {
+        this.facilityScoreService = facilityScoreService;
     }
 
     @PostMapping("/{propertyId}")
-    public FacilityScore addScore(@PathVariable Long propertyId,
-                                  @RequestBody FacilityScore score) {
-        return scoreService.addScore(propertyId, score);
+    public ResponseEntity<FacilityScore> addScore(
+            @PathVariable Long propertyId,
+            @RequestBody FacilityScore score) {
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                facilityScoreService.addScore(propertyId, score)
+        );
     }
 
     @GetMapping("/{propertyId}")
-    public FacilityScore getScore(@PathVariable Long propertyId) {
-        return scoreService.getScoreByProperty(propertyId);
+    public ResponseEntity<FacilityScore> getScore(
+            @PathVariable Long propertyId) {
+
+        return ResponseEntity.ok(
+                facilityScoreService.getScoreByProperty(propertyId)
+        );
     }
 }

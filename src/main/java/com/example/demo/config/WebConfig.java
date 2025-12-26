@@ -5,5 +5,5 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-    // No overrides needed — required only for context loading
+    // Intentionally left blank
 }
