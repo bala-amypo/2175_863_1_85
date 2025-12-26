@@ -14,14 +14,14 @@ import org.springframework.stereotype.Service;
 public class RatingServiceImpl implements RatingService {
 
     private final RatingResultRepository ratingResultRepository;
-    private final FacilityScoreRepository scoreRepository;
+    private final FacilityScoreRepository facilityScoreRepository;
     private final PropertyRepository propertyRepository;
 
     public RatingServiceImpl(RatingResultRepository ratingResultRepository,
-                             FacilityScoreRepository scoreRepository,
+                             FacilityScoreRepository facilityScoreRepository,
                              PropertyRepository propertyRepository) {
         this.ratingResultRepository = ratingResultRepository;
-        this.scoreRepository = scoreRepository;
+        this.facilityScoreRepository = facilityScoreRepository;
         this.propertyRepository = propertyRepository;
     }
 
@@ -30,11 +30,11 @@ public class RatingServiceImpl implements RatingService {
 
         Property property = propertyRepository.findById(propertyId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Property not found"));
+                        new ResourceNotFoundException("Property not found with id: " + propertyId));
 
-        FacilityScore score = scoreRepository.findByProperty(property)
+        FacilityScore score = facilityScoreRepository.findByProperty(property)
                 .orElseThrow(() ->
-                        new IllegalArgumentException("Facility score missing"));
+                        new ResourceNotFoundException("Facility score not found for property"));
 
         double avg = (score.getSchoolProximity()
                 + score.getHospitalProximity()
@@ -47,7 +47,10 @@ public class RatingServiceImpl implements RatingService {
         else if (avg < 8) category = "GOOD";
         else category = "EXCELLENT";
 
-        RatingResult result = new RatingResult(property, avg, category, null);
+        RatingResult result = new RatingResult();
+        result.setProperty(property);
+        result.setFinalRating(avg);
+        result.setRatingCategory(category);
 
         return ratingResultRepository.save(result);
     }
@@ -57,10 +60,10 @@ public class RatingServiceImpl implements RatingService {
 
         Property property = propertyRepository.findById(propertyId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Property not found"));
+                        new ResourceNotFoundException("Property not found with id: " + propertyId));
 
         return ratingResultRepository.findByProperty(property)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Rating not found"));
+                        new ResourceNotFoundException("Rating not found for property"));
     }
 }

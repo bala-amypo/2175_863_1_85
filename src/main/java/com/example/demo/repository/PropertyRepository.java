@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface PropertyRepository extends JpaRepository<Property, Long> {
 
-    // Derived query
-    List<Property> findByCity(String city);
-
-    // HQL query (tests EXPECT this)
+    // HQL query
     @Query("SELECT p FROM Property p WHERE p.city = :city")
     List<Property> findByCityHql(String city);
+
+    // Derived query
+    List<Property> findByCity(String city);
 }

@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.Property;
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.repository.PropertyRepository;
 import com.example.demo.service.PropertyService;
 import org.springframework.stereotype.Service;
@@ -20,11 +21,11 @@ public class PropertyServiceImpl implements PropertyService {
     public Property addProperty(Property property) {
 
         if (property.getPrice() < 0) {
-            throw new IllegalArgumentException("Price must be >= 0");
+            throw new BadRequestException("Price must be greater than or equal to 0");
         }
 
         if (property.getAreaSqFt() < 100) {
-            throw new IllegalArgumentException("Area must be at least 100 sq ft");
+            throw new BadRequestException("Area must be at least 100 sq ft");
         }
 
         return propertyRepository.save(property);

@@ -13,12 +13,12 @@ import java.util.List;
 @Service
 public class RatingLogServiceImpl implements RatingLogService {
 
-    private final RatingLogRepository logRepository;
+    private final RatingLogRepository ratingLogRepository;
     private final PropertyRepository propertyRepository;
 
-    public RatingLogServiceImpl(RatingLogRepository logRepository,
+    public RatingLogServiceImpl(RatingLogRepository ratingLogRepository,
                                 PropertyRepository propertyRepository) {
-        this.logRepository = logRepository;
+        this.ratingLogRepository = ratingLogRepository;
         this.propertyRepository = propertyRepository;
     }
 
@@ -27,10 +27,13 @@ public class RatingLogServiceImpl implements RatingLogService {
 
         Property property = propertyRepository.findById(propertyId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Property not found"));
+                        new ResourceNotFoundException("Property not found with id: " + propertyId));
 
-        RatingLog log = new RatingLog(property, message, null);
-        return logRepository.save(log);
+        RatingLog log = new RatingLog();
+        log.setProperty(property);
+        log.setMessage(message);
+
+        return ratingLogRepository.save(log);
     }
 
     @Override
@@ -38,8 +41,8 @@ public class RatingLogServiceImpl implements RatingLogService {
 
         Property property = propertyRepository.findById(propertyId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Property not found"));
+                        new ResourceNotFoundException("Property not found with id: " + propertyId));
 
-        return logRepository.findByProperty(property);
+        return ratingLogRepository.findByProperty(property);
     }
 }
