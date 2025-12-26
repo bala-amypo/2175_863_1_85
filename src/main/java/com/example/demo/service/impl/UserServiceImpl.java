@@ -21,21 +21,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
+    @Transactional 
     public User registerUser(User user) {
 
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("Email already exists");
-        }
-
-        if (user.getRole() == null) {
-            user.setRole("ANALYST");
-        }
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        return userRepository.save(user);
+    if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+        throw new IllegalArgumentException("Email already exists");
     }
+    user.setRole("USER");
+
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+    return userRepository.save(user);
+}
 
     @Override
     public User findByEmail(String email) {
