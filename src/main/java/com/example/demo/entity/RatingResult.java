@@ -16,11 +16,13 @@ public class RatingResult {
     private Property property;
 
     private Double finalRating;
+
     private String ratingCategory;
 
     private LocalDateTime ratedAt;
 
-    public RatingResult() {}
+    public RatingResult() {
+    }
 
     public RatingResult(Property property, Double finalRating,
                         String ratingCategory, LocalDateTime ratedAt) {
@@ -35,22 +37,35 @@ public class RatingResult {
         this.ratedAt = LocalDateTime.now();
     }
 
-    // getters
-    public Long getId() { return id; }
-    public Property getProperty() { return property; }
-    public Double getFinalRating() { return finalRating; }
-    public String getRatingCategory() { return ratingCategory; }
-    public LocalDateTime getRatedAt() { return ratedAt; }
+    public Long getId() {
+        return id;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
 
     public void setProperty(Property property) {
-    this.property = property;
-}
+        this.property = property;
+    }
 
-public void setFinalRating(Double finalRating) {
-    this.finalRating = finalRating;
-}
+    public Double getFinalRating() {
+        return finalRating;
+    }
 
-public void setRatingCategory(String ratingCategory) {
-    this.ratingCategory = ratingCategory;
-}
+    public void setFinalRating(Double finalRating) {
+        this.finalRating = finalRating;
+    }
+
+    public String getRatingCategory() {
+        return ratingCategory;
+    }
+
+    public void setRatingCategory(String ratingCategory) {
+        this.ratingCategory = ratingCategory;
+    }
+
+    public LocalDateTime getRatedAt() {
+        return ratedAt;
+    }
 }

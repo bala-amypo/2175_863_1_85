@@ -16,23 +16,27 @@ public class FacilityScore {
     @JoinColumn(name = "property_id", nullable = false, unique = true)
     private Property property;
 
-    @Min(0) @Max(10)
+    @Min(0)
+    @Max(10)
     private Integer schoolProximity;
 
-    @Min(0) @Max(10)
+    @Min(0)
+    @Max(10)
     private Integer hospitalProximity;
 
-    @Min(0) @Max(10)
+    @Min(0)
+    @Max(10)
     private Integer transportAccess;
 
-    @Min(0) @Max(10)
+    @Min(0)
+    @Max(10)
     private Integer safetyScore;
 
-    public FacilityScore() {}
+    public FacilityScore() {
+    }
 
     public FacilityScore(Property property, Integer schoolProximity,
-                         Integer hospitalProximity,
-                         Integer transportAccess,
+                         Integer hospitalProximity, Integer transportAccess,
                          Integer safetyScore) {
         this.property = property;
         this.schoolProximity = schoolProximity;
@@ -41,30 +45,47 @@ public class FacilityScore {
         this.safetyScore = safetyScore;
     }
 
-    // getters & setters
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public Property getProperty() { return property; }
-    public void setProperty(Property property) { this.property = property; }
+    public Property getProperty() {
+        return property;
+    }
 
-    public Integer getSchoolProximity() { return schoolProximity; }
-    public Integer getHospitalProximity() { return hospitalProximity; }
-    public Integer getTransportAccess() { return transportAccess; }
-    public Integer getSafetyScore() { return safetyScore; }
+    public void setProperty(Property property) {
+        this.property = property;
+    }
+
+    public Integer getSchoolProximity() {
+        return schoolProximity;
+    }
 
     public void setSchoolProximity(Integer schoolProximity) {
-    this.schoolProximity = schoolProximity;
-}
+        this.schoolProximity = schoolProximity;
+    }
 
-public void setHospitalProximity(Integer hospitalProximity) {
-    this.hospitalProximity = hospitalProximity;
-}
+    public Integer getHospitalProximity() {
+        return hospitalProximity;
+    }
 
-public void setTransportAccess(Integer transportAccess) {
-    this.transportAccess = transportAccess;
-}
+    public void setHospitalProximity(Integer hospitalProximity) {
+        this.hospitalProximity = hospitalProximity;
+    }
 
-public void setSafetyScore(Integer safetyScore) {
-    this.safetyScore = safetyScore;
-}
+    public Integer getTransportAccess() {
+        return transportAccess;
+    }
+
+    public void setTransportAccess(Integer transportAccess) {
+        this.transportAccess = transportAccess;
+    }
+
+    public Integer getSafetyScore() {
+        return safetyScore;
+    }
+
+    public void setSafetyScore(Integer safetyScore) {
+        this.safetyScore = safetyScore;
+    }
 }
