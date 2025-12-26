@@ -20,6 +20,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User registerUser(User user) {
 
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
