@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.*;
+import com.example.demo.dto.AuthResponse;
+import com.example.demo.dto.LoginRequest;
+import com.example.demo.dto.RegisterRequest;
 import com.example.demo.entity.User;
 import com.example.demo.security.JwtTokenProvider;
 import com.example.demo.service.UserService;
@@ -28,11 +30,11 @@ public class AuthController {
     @PostMapping("/register")
     public AuthResponse register(@RequestBody RegisterRequest request) {
 
-        User user = new User(
-                request.getName(),
-                request.getEmail(),
-                request.getPassword(),
-        );
+        // ✅ CREATE USER SAFELY (NO ROLE FROM REQUEST)
+        User user = new User();
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
 
         User saved = userService.registerUser(user);
 
