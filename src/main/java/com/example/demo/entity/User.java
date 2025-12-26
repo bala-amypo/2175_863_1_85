@@ -64,4 +64,4 @@ public class User {
     public void setAssignedProperties(Set<Property> assignedProperties) {
         this.assignedProperties = assignedProperties;
     }
-}x
+}
