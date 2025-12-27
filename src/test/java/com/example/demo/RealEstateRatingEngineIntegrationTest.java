@@ -739,7 +739,6 @@ public void testManyToManyPropertyDeletionRemovesAssociation() {
     Property p = createSampleProperty("MTM Prop Delete");
     p = propertyRepository.save(p);
 
-    // Maintain both sides
     user.getAssignedProperties().add(p);
     p.getAssignedUsers().add(user);
     userRepository.save(user);
