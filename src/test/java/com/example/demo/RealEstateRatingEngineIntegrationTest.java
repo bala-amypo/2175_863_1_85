@@ -527,7 +527,7 @@ public void testValidationOnFacilityScoreRange() {
         List<RatingLog> logs = ratingLogRepository.findByProperty(p);
         Assert.assertEquals(logs.size(), 2);
     }
-
+ 
     @Test(priority = 5, groups = "jpa-mapping")
     public void testUserEmailUniqueConstraint() {
         User u = new User();
